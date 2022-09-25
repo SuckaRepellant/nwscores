@@ -26,10 +26,16 @@ func GetLevels() []string {
 		"Spree", "Breakthrough", "Glide", "Closer", "Hike", "Switch", "Access", "Congregation", "Sequence", "Marathon",
 		// Hand of God
 		"Sacrifice", "Absolution",
+		// Red Sidequests
+		"Elevate Traversal I", "Elevate Traversal II", "Purify Traversal", "Godspeed Traversal", "Stomp Traversal", "Fireball Traversal", "Dominion Traversal", "Book of Life Traversal",
+		// Yellow Sidequests
+		"Sunset Flip Powerbomb", "Balloon Mountain", "Climbing Gym", "Fisherman Suplex", "STF", "Arena", "Attitude Adjustment", "Rocket",
+		// Violet Sidequests
+		"Doghouse", "Choker", "Chain", "Hellevator", "Razor", "All Seeing Eye", "Resident Saw I", "Resident Saw II",
 	}
 }
 
-func getXorKey() [16]byte {
+func GetXorKey() [16]byte {
 	return [16]byte{0x82, 0xca, 0x81, 0xa9, 0x96, 0x86, 0x97, 0xc6,
 		0xb9, 0xd9, 0xd2, 0xa7, 0x8d, 0xc9, 0x87, 0xa8}
 }
