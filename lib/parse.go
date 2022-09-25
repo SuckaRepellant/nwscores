@@ -25,7 +25,7 @@ func RetrievePSD(path string) (psd *PlayerSaveData, err error) {
 
 	saveContent := make([]byte, len(xoredSaveContent))
 
-	xorKey := getXorKey()
+	xorKey := GetXorKey()
 	for i := 0; i < len(xoredSaveContent); i++ {
 		saveContent[i] = xoredSaveContent[i] ^ xorKey[i%len(xorKey)]
 	}
