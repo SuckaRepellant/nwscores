@@ -71,6 +71,10 @@ var rootCmd = &cobra.Command{
 			viper.Set("wrs.sheets.apikey", apikey_edit.Text)
 			viper.Set("wrs.sheets.sheet_id", sheet_id_edit.Text)
 			viper.Set("wrs.sheets.ranges", ranges_edit.Text)
+
+			confFolder, _ := os.UserConfigDir()
+			os.MkdirAll(confFolder, 0644)
+
 			err := viper.WriteConfig()
 			if err != nil {
 				dialog.NewError(err, w).Show()
@@ -92,6 +96,10 @@ var rootCmd = &cobra.Command{
 			writeButton,
 		), w)
 		opts.Resize(fyne.NewSize(500, 200))
+
+		if viper.GetString("pbs.savepath") == `C:\Users\user\AppData\LocalLow\Little Flag Software, LLC\Neon White\1234\savedata.dat` {
+			opts.Show()
+		}
 
 		//opts.MinSize().Add(fyne.NewSize(500, 100))
 
@@ -179,15 +187,17 @@ var rootCmd = &cobra.Command{
 			opts.Show()
 		})
 
-		go func() {
-			wrRefresh.Disable()
-			pbRefresh.Disable()
-			pbRefresh.OnTapped()
-			wrRefresh.OnTapped()
-			refreshDiffs()
-			wrRefresh.Enable()
-			pbRefresh.Enable()
-		}()
+		if viper.GetString("pbs.savepath") != `C:\Users\user\AppData\LocalLow\Little Flag Software, LLC\Neon White\1234\savedata.dat` {
+			go func() {
+				wrRefresh.Disable()
+				pbRefresh.Disable()
+				pbRefresh.OnTapped()
+				wrRefresh.OnTapped()
+				refreshDiffs()
+				wrRefresh.Enable()
+				pbRefresh.Enable()
+			}()
+		}
 
 		w.SetContent(container.NewBorder(container.NewHBox(pbRefresh, wrRefresh, openOpts), nil, nil, nil, diffs))
 
@@ -203,6 +213,7 @@ func Execute() {
 }
 
 func init() {
+	cobra.MousetrapHelpText = ""
 	cobra.OnInitialize(initConfig)
 }
 
