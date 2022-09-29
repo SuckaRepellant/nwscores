@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"nwscores/lib"
-	"os"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -13,20 +12,12 @@ import (
 // xorCmd represents the xor command
 var xorCmd = &cobra.Command{
 	Use:   "xor",
-	Short: "xor a save file",
+	Short: "xor a file with the save key",
 	Run: func(cmd *cobra.Command, args []string) {
-		xoredSaveContent, err := os.ReadFile(viper.GetString("savefile"))
+		saveContent, err := lib.GetPlainSave(viper.GetString("savefile"))
 		if err != nil {
-			log.Fatalln("Error reading save file", err)
+			log.Fatalln(err)
 		}
-
-		saveContent := make([]byte, len(xoredSaveContent))
-
-		xorKey := lib.GetXorKey()
-		for i := 0; i < len(xoredSaveContent); i++ {
-			saveContent[i] = xoredSaveContent[i] ^ xorKey[i%len(xorKey)]
-		}
-
 		fmt.Println(string(saveContent))
 	},
 }
