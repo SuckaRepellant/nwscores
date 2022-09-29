@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"os"
+	"strings"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -48,6 +49,8 @@ func initConfig() {
 		viper.SafeWriteConfig()
 	}
 
+	viper.SetEnvPrefix("NWSCORES")
+	viper.SetEnvKeyReplacer(strings.NewReplacer("-", "_", ".", "_"))
 	viper.AutomaticEnv() // read in environment variables that match
 
 	// If a config file is found, read it in.
