@@ -46,7 +46,7 @@ var wrsCmd = &cobra.Command{
 				if err != nil {
 					log.Println("Error reading WRs", err)
 				}
-				time.Sleep(1 * time.Minute)
+				time.Sleep(1 * time.Hour)
 			}
 		}()
 
