@@ -1,10 +1,12 @@
 # Building
-Goreleaser is broken right now because of CGO requirement of new gui feature
 
 Build like this:
 `go build -ldflags '-s -w -H windowsgui' .`
 Linux
 `go build -ldflags '-s -w' .`
+
+To build with GUI enabled add `-tags=gui` to either command
+Building with GUI requires CGO which is not desirable
 
 # Usage
 

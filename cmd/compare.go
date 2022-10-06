@@ -17,7 +17,7 @@ var compareCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 
 		log.Println("Retrieving PB times from savefile...")
-		pbs, err := lib.RetrievePBs(viper.GetString("pbs.savefile"))
+		pbs, err := lib.RetrievePBsFromDisk(viper.GetString("pbs.savefile"))
 		if err != nil {
 			log.Fatalln("Error reading PBs", err)
 		}
@@ -73,5 +73,4 @@ var output string
 
 func init() {
 	rootCmd.AddCommand(compareCmd)
-	compareCmd.Flags().StringVarP(&output, "output", "o", "pretty", "Output format (pretty,plain)")
 }

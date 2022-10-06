@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+    <link rel="stylesheet" href="https://newcss.net/theme/night.css">
+    <title>Neon White Compare Tool</title>
+</head>
+<body>
+    <header><h1>Neon White Score Compare</h1></header>
+    <form method="POST" enctype="multipart/form-data">
+        <p>Your save file is likely to be under:</p>
+        <p><code>C:\Users\user\AppData\LocalLow\Little Flag Software, LLC\Neon White</code></p>
+        <input type="file" name="save"></input>
+        <input type="submit" value="Check"></input>
+    </form>
+    {{if .}}
+    <hr>
+    <table>
+        <thead>
+            <tr>
+                <th>Level</th>
+                <th>PB</th>
+                <th>WR</th>
+                <th>Diff</th>
+            </tr>
+        </thead>
+        <tbody>
+        {{range $r := .}}
+            <tr>
+                {{range $c := $r}}
+                <td>{{$c}}</td>
+                {{end}}
+            </tr>
+        {{end}}
+        </tbody>
+    </table>
+    {{end}}
+</body>
+</html>
+    
